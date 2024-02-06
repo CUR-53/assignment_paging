@@ -1,8 +1,7 @@
-
-import dbConnect from "./db/dbConnect.mjs";
-import authorModel from "./db/models/author.model.mjs";
-import galleryModel from "./db/models/gallery.model.mjs";
-import imageModel from "./db/models/image.model.mjs";
+import dbConnect from './db/dbConnect.mjs';
+import authorModel from './db/models/author.model.mjs';
+import galleryModel from './db/models/gallery.model.mjs';
+import imageModel from './db/models/image.model.mjs';
 
 /*
 
@@ -10,24 +9,17 @@ import imageModel from "./db/models/image.model.mjs";
 
 */
 export const fetchGalleries = async () => {
-    
-    console.log('fetchGalleries')
+  console.log('fetchGalleries');
 
-    try {
+  try {
+    await dbConnect();
 
-        await dbConnect();
+    let result = await galleryModel.find({});
 
-        let result = await galleryModel.find({});
-
-        return JSON.parse(JSON.stringify(result))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-
-
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /*
@@ -36,21 +28,16 @@ export const fetchGalleries = async () => {
 
 */
 export const fetchGalleryById = async (id) => {
+  console.log('fetchGalleryById', id);
 
-    console.log('fetchGalleryById', id)
+  try {
+    await dbConnect();
+    let result = await galleryModel.find({ _id: id });
 
-    try {
-
-        await dbConnect();
-        let result = await galleryModel.find({_id: id});
-
-        return JSON.parse(JSON.stringify(result[0]))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
+    return JSON.parse(JSON.stringify(result[0]));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /*
@@ -59,23 +46,17 @@ export const fetchGalleryById = async (id) => {
 
 */
 export const fetchGalleryByName = async (name) => {
+  console.log('fetchGalleryById', name);
 
-    console.log('fetchGalleryById', name)
+  try {
+    await dbConnect();
+    let result = await galleryModel.find({ name: name });
 
-    try {
-
-        await dbConnect();
-        let result = await galleryModel.find({name: name});
-
-        return JSON.parse(JSON.stringify(result[0]))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
+    return JSON.parse(JSON.stringify(result[0]));
+  } catch (error) {
+    console.log(error);
+  }
 };
-
 
 /*
 
@@ -83,95 +64,68 @@ export const fetchGalleryByName = async (name) => {
 
 */
 export const fetchAuthorById = async (id) => {
+  console.log('fetchAuthorById', id);
+  try {
+    await dbConnect();
+    let result = await authorModel.find({ _id: id });
 
-    console.log('fetchAuthorById', id)
-    try {
-
-        await dbConnect();
-        let result = await authorModel.find({_id: id});
-    
-        return JSON.parse(JSON.stringify(result[0]))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-
+    return JSON.parse(JSON.stringify(result[0]));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchAuthorByName = async (name) => {
+  console.log('fetchAuthorByName', name);
+  try {
+    await dbConnect();
+    let result = await authorModel.find({ author: name });
 
-    console.log('fetchAuthorByName', name)
-    try {
-
-        await dbConnect();
-        let result = await authorModel.find({author: name});
-        
-        return JSON.parse(JSON.stringify(result[0]))
-
-    } catch (error) {
-
-        console.log(error)
-        return JSON.parse(JSON.stringify({}))
-    }
-
+    return JSON.parse(JSON.stringify(result[0]));
+  } catch (error) {
+    console.log(error);
+    return JSON.parse(JSON.stringify({}));
+  }
 };
 
 export const fetchAuthorsByGallery = async (gallery) => {
+  console.log('fetchAuthorByGallery', gallery);
+  try {
+    await dbConnect();
+    let result = await authorModel.find({ gallery: gallery });
 
-    console.log('fetchAuthorByGallery', gallery)
-    try {
-
-        await dbConnect();
-        let result = await authorModel.find({gallery: gallery});
-        
-        return JSON.parse(JSON.stringify(result))
-
-    } catch (error) {
-
-        console.log(error)
-        return JSON.parse(JSON.stringify({}))
-    }
-
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    console.log(error);
+    return JSON.parse(JSON.stringify({}));
+  }
 };
 
 export const fetchAuthorByUrlName = async (niceUrl) => {
+  console.log('fetchAuthorByUrlName', niceUrl);
+  try {
+    await dbConnect();
+    let result = await authorModel.find({ niceUrl: niceUrl });
 
-    console.log('fetchAuthorByUrlName', niceUrl)
-    try {
-
-        await dbConnect();
-        let result = await authorModel.find({niceUrl: niceUrl});
-        
-        return JSON.parse(JSON.stringify(result[0]))
-
-    } catch (error) {
-
-        console.log(error)
-        return JSON.parse(JSON.stringify({}))
-    }
-
+    return JSON.parse(JSON.stringify(result[0]));
+  } catch (error) {
+    console.log(error);
+    return JSON.parse(JSON.stringify({}));
+  }
 };
 
 export const fetchAuthorByFolder = async (folder) => {
+  console.log('fetchAuthorByFolder', folder);
+  try {
+    await dbConnect();
+    let result = await authorModel.find({ folder: folder });
 
-    console.log('fetchAuthorByFolder', folder)
-    try {
-
-        await dbConnect();
-        let result = await authorModel.find({folder: folder});
-        
-        return JSON.parse(JSON.stringify(result[0]))
-
-    } catch (error) {
-
-        console.log(error)
-        return JSON.parse(JSON.stringify({}))
-    }
-
+    return JSON.parse(JSON.stringify(result[0]));
+  } catch (error) {
+    console.log(error);
+    return JSON.parse(JSON.stringify({}));
+  }
 };
-
 
 /*
 
@@ -179,22 +133,16 @@ export const fetchAuthorByFolder = async (folder) => {
 
 */
 export const fetchAuthors = async () => {
+  console.log('fetchAuthors');
 
-    console.log('fetchAuthors')
-    
-    try {
+  try {
+    await dbConnect();
+    let result = await authorModel.find({});
 
-        await dbConnect();
-        let result = await authorModel.find({});
-    
-        return JSON.parse(JSON.stringify(result))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /*
@@ -203,22 +151,16 @@ export const fetchAuthors = async () => {
 
 */
 export const fetchImagesByAuthorName = async (author) => {
+  console.log('fetchImagesByAuthorName', author);
 
-    console.log('fetchImagesByAuthorName', author)
+  try {
+    await dbConnect();
+    let result = await imageModel.find({ author: author });
 
-    try {
-
-        await dbConnect();
-        let result = await imageModel.find({author : author });
-    
-        return JSON.parse(JSON.stringify(result))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /*
@@ -227,97 +169,77 @@ export const fetchImagesByAuthorName = async (author) => {
 
 */
 export const fetchImagesForGallery = async (name) => {
+  console.log('fetchImagesForGallery', name);
 
-    console.log('fetchImagesForGallery', name)
+  try {
+    await dbConnect();
+    let result = await imageModel.find({ gallery: { $regex: name, $options: 'i' } });
 
-    try {
-
-        await dbConnect();
-        let result = await imageModel.find({"gallery" :  { $regex:name, $options: 'i' } });
-    
-        return JSON.parse(JSON.stringify(result))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const fetchImages= async (name) => {
+export const fetchImages = async (name) => {
+  console.log('fetchImages', name);
 
-    console.log('fetchImages', name)
+  try {
+    await dbConnect();
+    let result = await imageModel.find({});
 
-    try {
-
-        await dbConnect();
-        let result = await imageModel.find({});
-    
-        return JSON.parse(JSON.stringify(result))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const fetchImagesQuery = async (page = 1, query = {}, term='') => {
+export const fetchImagesQuery = async (page = 1, query = {}, term = '') => {
+  console.log('fetchImages', page);
 
-    console.log('fetchImages', page)
+  try {
+    await dbConnect();
+    let searchQuery = query;
+    let pageNumber = page;
+    let limit = 10;
+    let skip = (pageNumber - 1) * limit;
 
-    try {
+    let searchTerm = term;
+    searchQuery = {
+      $or: [
+        {
+          author: new RegExp(searchTerm, 'i'),
+        },
+        {
+          gallery: new RegExp(searchTerm, 'i'),
+        },
+        {
+          'meta.image.Make': new RegExp(searchTerm, 'i'),
+        },
+        {
+          'meta.image.Model': new RegExp(searchTerm, 'i'),
+        },
+        {
+          'meta.image.Software': new RegExp(searchTerm, 'i'),
+        },
+        {
+          'meta.exif.LensModel': new RegExp(searchTerm, 'i'),
+        },
+      ],
+    };
 
-        await dbConnect();
-        let searchQuery = query;
-        let pageNumber = page;
-        let limit = 10;
-        let skip = (pageNumber -1) * limit;
-        
-        let searchTerm = term;
-        searchQuery = {
-          
-            $or: [
-                {
-                    author: new RegExp(searchTerm, 'i')
-                },
-                {
-                    gallery: new RegExp(searchTerm, 'i')
-                },
-                {
-                    "meta.image.Make": new RegExp(searchTerm, 'i')
-                },
-                {
-                    "meta.image.Model": new RegExp(searchTerm, 'i')
-                },
-                {
-                    "meta.image.Software": new RegExp(searchTerm, 'i')
-                },
-                {
-                    "meta.exif.LensModel": new RegExp(searchTerm, 'i')
-                }
-            ]
-             
-            
-          } 
-
-
-        let result = await imageModel.aggregate([
-            { '$match'    : searchQuery},
-            // { '$sort'     : { 'author' : -1 } },
-            { '$facet'    : {
-                metadata: [ { $count: "total" },{ $addFields: { page: parseInt(pageNumber), itemsPrPage: limit } } ],
-                data: [ { $skip: skip }, { $limit: limit } ]
-            } }
-        ] )
-        return JSON.parse(JSON.stringify(result))
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-
+    let result = await imageModel.aggregate([
+      { $match: searchQuery },
+      // { '$sort'     : { 'author' : -1 } },
+      {
+        $facet: {
+          metadata: [{ $count: 'total' }, { $addFields: { page: parseInt(pageNumber), itemsPrPage: limit } }],
+          data: [{ $skip: skip }, { $limit: limit }],
+        },
+      },
+    ]);
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    console.log(error);
+  }
 };
